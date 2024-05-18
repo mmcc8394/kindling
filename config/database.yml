@@ -9,3 +9,10 @@ development:
   host: localhost
   username: matt
   password: <%= Rails.application.credentials.db_password_dev %>
+
+test:
+  <<: *default
+  database: kindling_test
+  host: localhost
+  username: matt
+  password: <%= Rails.application.credentials.db_password_dev %>

@@ -42,6 +42,7 @@ end
 
 group :development do
   gem "web-console"
+  gem "solargraph"
 end
 
 group :test do

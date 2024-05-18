@@ -66,4 +66,5 @@ RSpec.configure do |config|
 
   # make FactoryBot methods available
   config.include FactoryBot::Syntax::Methods
+  #config.include Rails.application.routes.url_helpers
 end

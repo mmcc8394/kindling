@@ -25,51 +25,40 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Intall Postgres
         run: sudo apt install -yqq libpq-dev
-
       - name: Set Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 21.1
-
       - name: Install Yarn
         uses: borales/actions-yarn@v4
         with:
           cmd: install
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-
       - name: Install Gems
         run: |
           bundle install
-
       - name: Set up database
         env:
           RAILS_ENV: test
         run: |
           cp config/database.yml.ci config/database.yml
           rake db:create db:migrate
-
       - name: Compile assets
         run: ./bin/rails assets:precompile
-
       - name: Run tests
         run: bundle exec rspec
 
-  # generate a workflow to auto merge if the above tests pass
   merge:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Merge pull request
         run: git merge ${{ github.event.pull_request.head.sha }}
-
       - name: Push changes
         run: git push
 

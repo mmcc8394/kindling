@@ -59,14 +59,17 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-  auto-pull-request:
+  # generate a workflow to auto merge if the above tests pass
+  merge:
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - name: Create Pull Request
-        uses: vsoch/pull-request-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_BRANCH: "main"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Merge pull request
+        run: git merge ${{ github.event.pull_request.head.sha }}
+      - name: Push changes
+        run: git push
 
   # lint:
   #   runs-on: ubuntu-latest

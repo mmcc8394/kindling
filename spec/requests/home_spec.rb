@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Home", type: :request do
-  let(:home_message) { "This is a test." }
+  let(:home_message) { "Testing... Testing..." }
   let!(:testing) { create(:testing, message: home_message) }
 
   it "responds successfully" do

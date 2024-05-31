@@ -66,8 +66,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Merge pull request
         run: git merge ${{ github.event.pull_request.head.sha }}
+
       - name: Push changes
         run: git push
 

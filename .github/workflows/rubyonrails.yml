@@ -59,27 +59,14 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-  auto-merge:
-    needs: build
+  auto-pull-request:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Configure git
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-
-      - name: Auto Merge
+      - name: Create Pull Request
+        uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git checkout main
-          git pull origin main
-          git merge ${{ github.head_ref }}
-          git push origin main
+          PULL_REQUEST_BRANCH: "main"
 
   # lint:
   #   runs-on: ubuntu-latest

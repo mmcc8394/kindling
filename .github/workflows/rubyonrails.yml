@@ -51,27 +51,6 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-  merge:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Set up Git
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-      - name: Fetch all branches
-        run: git fetch --all
-      - name: Merge branch
-        run: |
-          git checkout origin/main
-          git pull origin/main
-          git merge ${{ github.head_ref }}
-          git push origin/main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # merge:
   #   runs-on: ubuntu-latest
   #   needs: build

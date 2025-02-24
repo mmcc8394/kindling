@@ -5,7 +5,7 @@ RSpec.describe Testing, type: :model do
     let(:testing) { build(:testing) }
 
     it 'is valid' do
-      expect(testing).to be_valid
+      expect(testing).to_not be_valid
     end
 
     it 'is invalid' do

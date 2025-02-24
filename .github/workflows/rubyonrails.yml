@@ -1,4 +1,4 @@
-name: "Kinding CI"
+name: "Kindling CI"
 on:
     pull_request:
       branches:
